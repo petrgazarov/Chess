@@ -1,9 +1,9 @@
 class SlidingPiece < Piece
-  DELTAS_DIAG = SlidingPiece.generate_digonals
+  DELTAS_DIAG = SlidingPiece.generate_diags
 
   DELTAS_HORIZ_VERT = SlidingPiece.generate_horiz_vert
 
-  def self.generate_digonals
+  def self.generate_diags
     result = [[],[],[],[]]
     1.upto(Board::SIZE - 1) do |idx|
       result[0] << [idx, idx]
