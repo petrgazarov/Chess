@@ -1,5 +1,3 @@
-require_relative 'library'
-
 class Board
   SIZE = 8
 
@@ -19,33 +17,45 @@ class Board
   end
 
   def populate_white
-    (0..7).each do |idx|
-      self[[6, idx]] = Pawn.new([6, idx], self)
+    (0...SIZE).each do |idx|
+      self[[SIZE - 2, idx]] = Pawn.new([SIZE - 2, idx], self, :white)
     end
 
-    self[[7, 0]] = Rook.new([7, 0], self)
-    self[[7, 7]] = Rook.new([7, 7], self)
-    self[[7, 1]] = Bishop.new([7, 1], self)
-    self[[7, 6]] = Bishop.new([7, 6], self)
-    self[[7, 2]] = Knight.new([7, 2], self)
-    self[[7, 5]] = Knight.new([7, 5], self)
-    self[[7, 4]] = Queen.new([7, 4], self)
-    self[[7, 3]] = King.new([7, 3], self)
+    self[[SIZE - 1, 0]] = Rook.new([SIZE - 1, 0], self, :white)
+    self[[SIZE - 1, 7]] = Rook.new([SIZE - 1, 7], self, :white)
+    self[[SIZE - 1, 1]] = Bishop.new([SIZE - 1, 1], self, :white)
+    self[[SIZE - 1, 6]] = Bishop.new([SIZE - 1, 6], self, :white)
+    self[[SIZE - 1, 2]] = Knight.new([SIZE - 1, 2], self, :white)
+    self[[SIZE - 1, 5]] = Knight.new([SIZE - 1, 5], self, :white)
+    self[[SIZE - 1, 4]] = Queen.new([SIZE - 1, 4], self, :white)
+    self[[SIZE - 1, 3]] = King.new([SIZE - 1, 3], self, :white)
   end
 
   def populate_black
     (0..7).each do |idx|
-      self[[1, idx]] = Pawn.new([1, idx], self)
+      self[[1, idx]] = Pawn.new([1, idx], self, :black)
     end
 
-    self[[0, 0]] = Rook.new([0, 0], self)
-    self[[0, 7]] = Rook.new([0, 7], self)
-    self[[0, 1]] = Bishop.new([0, 1], self)
-    self[[0, 6]] = Bishop.new([0, 6], self)
-    self[[0, 2]] = Knight.new([0, 2], self)
-    self[[0, 5]] = Knight.new([0, 5], self)
-    self[[0, 3]] = Queen.new([0, 3], self)
-    self[[0, 4]] = King.new([0, 4], self)
+    self[[0, 0]] = Rook.new([0, 0], self, :black)
+    self[[0, 7]] = Rook.new([0, 7], self, :black)
+    self[[0, 1]] = Bishop.new([0, 1], self, :black)
+    self[[0, 6]] = Bishop.new([0, 6], self, :black)
+    self[[0, 2]] = Knight.new([0, 2], self, :black)
+    self[[0, 5]] = Knight.new([0, 5], self, :black)
+    self[[0, 3]] = Queen.new([0, 3], self, :black)
+    self[[0, 4]] = King.new([0, 4], self, :black)
+  end
+
+  def render
+    (0...SIZE).each do |x|
+      (0...SIZE).each do |y|
+        if self[[x, y]]
+          print self[[x, y]].to_s + " "
+        else
+          print "  "
+      end
+      print "\n"
+    end
   end
 
   def in_check?(color)

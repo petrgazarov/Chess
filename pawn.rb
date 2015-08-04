@@ -1,9 +1,9 @@
 class Pawn < Piece
   attr_accessor :first
 
-  def initialize(pos, board)
+  def initialize(pos, board, color)
     @first = true
-    super(pos, board)
+    super(pos, board, color)
   end
 
   def moves
@@ -19,5 +19,13 @@ class Pawn < Piece
 
   def occupied?(pos)
     board[pos]
+  end
+
+  def to_s
+    if color = :black
+      "\u265F".encode('utf-8')
+    else
+      "\u2659".encode('utf-8')
+    end
   end
 end

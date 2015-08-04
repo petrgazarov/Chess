@@ -1,4 +1,3 @@
-
 class Piece
   DELTAS_DIAG = [[-1, -1],
                  [-1,  1],
@@ -14,9 +13,10 @@ class Piece
 
   attr_accessor :position, :board
 
-  def initialize(pos, board)
+  def initialize(pos, board, color)
     @position = pos
     @board = board
+    @color = color
   end
 
   def valid_moves
