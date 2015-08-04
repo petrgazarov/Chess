@@ -1,6 +1,10 @@
 class Board
   SIZE = 8
 
+  def self.on_board?(pos)
+    pos.all? { |coord| coord.between?(0...SIZE) }
+  end
+
   attr_accessor :grid
 
   def initialize

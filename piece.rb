@@ -6,15 +6,14 @@ class Piece
     @board = board
   end
 
-  def moves
-
-  end
-
   def valid_moves
-
+    moves.select do |pos|
+      Board.on_board?(pos) &&
+        !move_into_check(pos)
+    end
   end
 
-  def move_into_check?
+  def move_into_check?(pos)
 
   end
 end
