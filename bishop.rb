@@ -1,6 +1,6 @@
 class Bishop < SlidingPiece
 
-  def move_dirs
+  def deltas
     DELTAS_DIAG
   end
 end

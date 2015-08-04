@@ -1,12 +1,6 @@
 class King < SteppingPiece
-  DELTAS = [
-    [-1, -1],
-    [-1,  0],
-    [-1,  1],
-    [ 0, -1],
-    [ 0,  1],
-    [ 1, -1],
-    [ 1,  0],
-    [ 1,  1]
-  ]
+
+  def deltas
+    DELTAS_DIAG + DELTAS_HORIZ_VERT
+  end
 end

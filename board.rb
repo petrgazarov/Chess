@@ -1,8 +1,10 @@
+require_relative 'library'
+
 class Board
   SIZE = 8
 
   def self.on_board?(pos)
-    pos.all? { |coord| coord.between?(0...SIZE) }
+    pos.all? { |coord| coord.between?(0,SIZE) }
   end
 
   attr_accessor :grid
@@ -20,11 +22,11 @@ class Board
   end
 
   def [](pos)
-    grid[pos[0], pos[1]]
+    grid[pos[0]][pos[1]]
   end
 
   def []=(pos, value)
-    self.grid[pos[0], pos[1]] = value
+    self.grid[pos[0]][pos[1]] = value
   end
 
   def dup

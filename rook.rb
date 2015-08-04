@@ -1,6 +1,6 @@
 class Rook < SlidingPiece
 
-  def move_dirs
+  def deltas
     DELTAS_HORIZ_VERT
   end
 end

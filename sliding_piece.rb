@@ -1,7 +1,4 @@
 class SlidingPiece < Piece
-  DELTAS_DIAG = SlidingPiece.generate_diags
-
-  DELTAS_HORIZ_VERT = SlidingPiece.generate_horiz_vert
 
   def self.generate_diags
     result = [[],[],[],[]]
@@ -27,7 +24,7 @@ class SlidingPiece < Piece
 
   def moves
     result = []
-    move_dirs.each do |branch|
+    deltas.each do |branch|
       result += check_branch(branch)
     end
 
