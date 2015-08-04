@@ -22,7 +22,7 @@ class Pawn < Piece
   end
 
   def to_s
-    if color = :black
+    if color == :black
       "\u265F".encode('utf-8')
     else
       "\u2659".encode('utf-8')

@@ -5,7 +5,7 @@ class King < SteppingPiece
   end
 
   def to_s
-    if color = :black
+    if color == :black
       "\u265A".encode('utf-8')
     else
       "\u2654".encode('utf-8')

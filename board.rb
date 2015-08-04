@@ -23,12 +23,12 @@ class Board
 
     self[[SIZE - 1, 0]] = Rook.new([SIZE - 1, 0], self, :white)
     self[[SIZE - 1, 7]] = Rook.new([SIZE - 1, 7], self, :white)
-    self[[SIZE - 1, 1]] = Bishop.new([SIZE - 1, 1], self, :white)
-    self[[SIZE - 1, 6]] = Bishop.new([SIZE - 1, 6], self, :white)
-    self[[SIZE - 1, 2]] = Knight.new([SIZE - 1, 2], self, :white)
-    self[[SIZE - 1, 5]] = Knight.new([SIZE - 1, 5], self, :white)
-    self[[SIZE - 1, 4]] = Queen.new([SIZE - 1, 4], self, :white)
-    self[[SIZE - 1, 3]] = King.new([SIZE - 1, 3], self, :white)
+    self[[SIZE - 1, 2]] = Bishop.new([SIZE - 1, 2], self, :white)
+    self[[SIZE - 1, 5]] = Bishop.new([SIZE - 1, 5], self, :white)
+    self[[SIZE - 1, 1]] = Knight.new([SIZE - 1, 1], self, :white)
+    self[[SIZE - 1, 6]] = Knight.new([SIZE - 1, 6], self, :white)
+    self[[SIZE - 1, 3]] = Queen.new([SIZE - 1, 3], self, :white)
+    self[[SIZE - 1, 4]] = King.new([SIZE - 1, 4], self, :white)
   end
 
   def populate_black
@@ -38,10 +38,10 @@ class Board
 
     self[[0, 0]] = Rook.new([0, 0], self, :black)
     self[[0, 7]] = Rook.new([0, 7], self, :black)
-    self[[0, 1]] = Bishop.new([0, 1], self, :black)
-    self[[0, 6]] = Bishop.new([0, 6], self, :black)
-    self[[0, 2]] = Knight.new([0, 2], self, :black)
-    self[[0, 5]] = Knight.new([0, 5], self, :black)
+    self[[0, 2]] = Bishop.new([0, 2], self, :black)
+    self[[0, 5]] = Bishop.new([0, 5], self, :black)
+    self[[0, 1]] = Knight.new([0, 1], self, :black)
+    self[[0, 6]] = Knight.new([0, 6], self, :black)
     self[[0, 3]] = Queen.new([0, 3], self, :black)
     self[[0, 4]] = King.new([0, 4], self, :black)
   end
@@ -53,6 +53,7 @@ class Board
           print self[[x, y]].to_s + " "
         else
           print "  "
+        end
       end
       print "\n"
     end

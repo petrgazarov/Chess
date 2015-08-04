@@ -5,7 +5,7 @@ class Queen < SlidingPiece
   end
 
   def to_s
-    if color = :black
+    if color == :black
       "\u265B".encode('utf-8')
     else
       "\u2655".encode('utf-8')

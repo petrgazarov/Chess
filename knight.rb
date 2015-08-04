@@ -15,7 +15,7 @@ class Knight < SteppingPiece
   end
 
   def to_s
-    if color = :black
+    if color == :black
       "\u265E".encode('utf-8')
     else
       "\u2658".encode('utf-8')
