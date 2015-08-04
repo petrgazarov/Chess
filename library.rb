@@ -1,4 +1,5 @@
 require 'byebug'
+require_relative 'game'
 require_relative 'board'
 require_relative 'piece'
 require_relative 'stepping_piece'
@@ -12,7 +13,7 @@ require_relative 'pawn'
 
 if __FILE__ == $PROGRAM_NAME
 
-  test = Pawn.new([0, 0], Board.new)
+  test = Pawn.new([7, 3], Board.new)
   p test.valid_moves
 
 end

@@ -13,6 +13,41 @@ class Board
     @grid = Array.new(SIZE) { Array.new(SIZE) }
   end
 
+  def populate
+    populate_white
+    populate_black
+  end
+
+  def populate_white
+    (0..7).each do |idx|
+      self[[6, idx]] = Pawn.new([6, idx], self)
+    end
+
+    self[[7, 0]] = Rook.new([7, 0], self)
+    self[[7, 7]] = Rook.new([7, 7], self)
+    self[[7, 1]] = Bishop.new([7, 1], self)
+    self[[7, 6]] = Bishop.new([7, 6], self)
+    self[[7, 2]] = Knight.new([7, 2], self)
+    self[[7, 5]] = Knight.new([7, 5], self)
+    self[[7, 4]] = Queen.new([7, 4], self)
+    self[[7, 3]] = King.new([7, 3], self)
+  end
+
+  def populate_black
+    (0..7).each do |idx|
+      self[[1, idx]] = Pawn.new([1, idx], self)
+    end
+
+    self[[0, 0]] = Rook.new([0, 0], self)
+    self[[0, 7]] = Rook.new([0, 7], self)
+    self[[0, 1]] = Bishop.new([0, 1], self)
+    self[[0, 6]] = Bishop.new([0, 6], self)
+    self[[0, 2]] = Knight.new([0, 2], self)
+    self[[0, 5]] = Knight.new([0, 5], self)
+    self[[0, 3]] = Queen.new([0, 3], self)
+    self[[0, 4]] = King.new([0, 4], self)
+  end
+
   def in_check?(color)
 
   end
