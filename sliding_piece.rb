@@ -26,10 +26,12 @@ class SlidingPiece < Piece
   end
 
   def moves
-    x, y = position[0], position[1]
-    move_dirs.map do |row, col|
-      [row + x, col + y]
+    result = []
+    move_dirs.each do |branch|
+      result += check_branch(branch)
     end
+
+    result
   end
 
   def occupied?(pos)
@@ -38,8 +40,14 @@ class SlidingPiece < Piece
 
   private
 
-  def check_branch
+  def check_branch(branch)
+    result = []
+    branch.each do |pos|
+      return result if board[pos]
+      result << pos
+    end
 
+    result
   end
 
 end
