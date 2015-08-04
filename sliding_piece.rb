@@ -1,31 +1,9 @@
 class SlidingPiece < Piece
 
-  def self.generate_diags
-    result = [[],[],[],[]]
-    1.upto(Board::SIZE - 1) do |idx|
-      result[0] << [idx, idx]
-      result[1] << [idx, -idx]
-      result[2] << [-idx, idx]
-      result[3] << [-idx, -idx]
-    end
-    result
-  end
-
-  def self.generate_horiz_vert
-    result = [[],[],[],[]]
-    1.upto(Board::SIZE - 1) do |idx|
-      result[0] << [idx, 0]
-      result[1] << [-idx, 0]
-      result[2] << [0, idx]
-      result[3] << [0, -idx]
-    end
-    result
-  end
-
   def moves
     result = []
-    deltas.each do |branch|
-      result += check_branch(branch)
+    deltas.each do |delta|
+      result += make_branch(delta)
     end
 
     result
@@ -37,11 +15,14 @@ class SlidingPiece < Piece
 
   private
 
-  def check_branch(branch)
+  def make_branch(delta)
     result = []
-    branch.each do |pos|
-      return result if board[pos]
-      result << pos
+    1.upto(Board::SIZE - 1) do |idx|
+      x = delta[0] * idx + position[0]
+      y = delta[1] * idx + position[1]
+
+      return result if board[[x, y]]
+      result << [x, y]
     end
 
     result

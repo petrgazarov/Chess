@@ -4,7 +4,7 @@ class SteppingPiece < Piece
     result = []
     x, y = position[0], position[1]
     positions = deltas.map { |row, col| [row + x, col + y] }
-    positions.each { |pos| result << pos if board[pos].nil? }
+    positions.each { |pos| result << pos unless board[pos] }
     result
   end
 end
