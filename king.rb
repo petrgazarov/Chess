@@ -1,0 +1,2 @@
+class King < SteppingPiece
+end

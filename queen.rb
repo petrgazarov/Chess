@@ -1,0 +1,2 @@
+class Queen < SlidingPiece
+end
