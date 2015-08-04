@@ -22,4 +22,15 @@ class Board
   def []=(pos, value)
     self.grid[pos[0], pos[1]] = value
   end
+
+  def dup
+    new_board = self.map do |row|
+      row.map do |piece|
+        new_piece = piece.dup
+        new_piece.pos = piece.position.dup
+        new_piece
+      end
+    end
+    new_board
+  end
 end

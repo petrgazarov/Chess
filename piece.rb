@@ -9,4 +9,12 @@ class Piece
   def moves
 
   end
+
+  def valid_moves
+
+  end
+
+  def move_into_check?
+
+  end
 end
