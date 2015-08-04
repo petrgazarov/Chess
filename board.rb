@@ -25,12 +25,26 @@ class Board
 
   def dup
     new_board = self.map do |row|
-      row.map do |piece|
-        new_piece = piece.dup
-        new_piece.pos = piece.position.dup
-        new_piece
+      row.map do |square|
+        if square
+          new_piece = square.dup
+          new_piece.pos = square.position.dup
+          new_piece
+        else
+          nil
+        end
       end
     end
-    new_board
+    new_board.assign_duped_board
+  end
+
+  private
+  def assign_duped_board
+    self.each do |row|
+      row.each do |square|
+        square ? square.board = self : nil
+      end
+    end
+    self
   end
 end

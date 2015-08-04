@@ -1,2 +1,4 @@
 class SteppingPiece < Piece
+
+  
 end
