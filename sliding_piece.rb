@@ -20,7 +20,10 @@ class SlidingPiece < Piece
   end
 
   def moves
-    move_dirs
+    x, y = position[0], position[1]
+    move_dirs.map do |row, col|
+      [row + x, col + y]
+    end
   end
 
 
