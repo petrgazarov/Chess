@@ -9,8 +9,9 @@ class Pawn < Piece
 
   def moves
     result = []
-    x, y = position[0], position[1]
-    color == :black ? direction = 1 : direction = -1
+    x, y = position
+    direction = (color == :black ? 1 : -1)
+
     result << [x + direction, y] unless occupied?([x + direction, y])
     result << [x + direction * 2, y] unless first_pos != position ||
       occupied?([x + direction * 2, y])

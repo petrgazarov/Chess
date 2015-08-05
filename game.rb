@@ -25,6 +25,7 @@ class Game
   end
 
   def play_turn
+    system "clear" or system "cls"
     board.render
     puts "#{current_player.name}'s turn!"
 

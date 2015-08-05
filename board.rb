@@ -1,5 +1,6 @@
 class Board
   SIZE = 8
+  PIECE_ORDER = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
 
   def self.on_board?(pos)
     pos.all? { |coord| coord.between?(0, SIZE - 1) }
@@ -7,48 +8,27 @@ class Board
 
   attr_accessor :grid
 
-  def initialize(grid = nil)
+  def initialize(should_populate = true)
     if grid
       @grid = grid
     else
       @grid = Array.new(SIZE) { Array.new(SIZE) }
-      populate
+      [:white, :black].each { |color| populate(color) }
     end
   end
 
-  def populate
-    populate_white
-    populate_black
-  end
+  def populate(color)
+    row = (color == :white ? 7 : 0)
+    pawn_row = (color == :white ? 6 : 1)
 
-  def populate_white
     (0...SIZE).each do |idx|
-      self[[SIZE - 2, idx]] = Pawn.new([SIZE - 2, idx], self, :white)
+      self[[pawn_row, idx]] = Pawn.new([pawn_row, idx], self, color)
     end
 
-    self[[SIZE - 1, 0]] = Rook.new([SIZE - 1, 0], self, :white)
-    self[[SIZE - 1, 7]] = Rook.new([SIZE - 1, 7], self, :white)
-    self[[SIZE - 1, 2]] = Bishop.new([SIZE - 1, 2], self, :white)
-    self[[SIZE - 1, 5]] = Bishop.new([SIZE - 1, 5], self, :white)
-    self[[SIZE - 1, 1]] = Knight.new([SIZE - 1, 1], self, :white)
-    self[[SIZE - 1, 6]] = Knight.new([SIZE - 1, 6], self, :white)
-    self[[SIZE - 1, 3]] = Queen.new([SIZE - 1, 3], self, :white)
-    self[[SIZE - 1, 4]] = King.new([SIZE - 1, 4], self, :white)
-  end
-
-  def populate_black
-    (0..7).each do |idx|
-      self[[1, idx]] = Pawn.new([1, idx], self, :black)
+    PIECE_ORDER.each_with_index do |piece_class, column|
+      pos = [row, column]
+      self[pos] = piece_class.new(pos, self, color)
     end
-
-    self[[0, 0]] = Rook.new([0, 0], self, :black)
-    self[[0, 7]] = Rook.new([0, 7], self, :black)
-    self[[0, 2]] = Bishop.new([0, 2], self, :black)
-    self[[0, 5]] = Bishop.new([0, 5], self, :black)
-    self[[0, 1]] = Knight.new([0, 1], self, :black)
-    self[[0, 6]] = Knight.new([0, 6], self, :black)
-    self[[0, 3]] = Queen.new([0, 3], self, :black)
-    self[[0, 4]] = King.new([0, 4], self, :black)
   end
 
   def render
@@ -76,7 +56,9 @@ class Board
     raise MoveError.new("No piece on starting position!") unless self[start_pos]
 
     moves = self[start_pos].moves
-    if !moves.include?(end_pos)
+    if start_pos ==  end_pos
+      raise MoveError.new("You must move your piece!")
+    elsif !moves.include?(end_pos)
       raise MoveError.new("That piece can't move there!")
     elsif self[start_pos].move_into_check?(end_pos)
       raise MoveError.new("That move would put you in check!")
@@ -103,19 +85,7 @@ class Board
 
   def dup
     new_board = Board.new
-
-    grid.each_with_index do |row, x|
-      row.each_with_index do |square, y|
-        if square
-          new_board[[x, y]] = square.dup
-          new_board[[x, y]].position = square.position.dup
-          new_board[[x, y]].board = new_board
-        else
-          new_board[[x, y]] = nil
-        end
-      end
-    end
-
+    pieces.each { |piece| new_board[piece.position] = piece.dup(new_board) }
     new_board
   end
 
@@ -129,12 +99,8 @@ class Board
   end
 
   def find_vulnerability(pos, color)
-    iterate_through_board do |x, y|
-      if self[[x,y]] &&
-          self[[x, y]].color != color &&
-          self[[x, y]].moves.include?(pos)
-        return true
-      end
+    pieces.each do |piece|
+      return true if piece.color != color && piece.moves.include?(pos)
     end
     false
   end
@@ -150,14 +116,12 @@ class Board
 
   def checkmate?(color)
     result = []
-    iterate_through_board do |x, y|
-      pos = [x, y]
-      if self[pos]
-        result += self[pos].valid_moves if self[pos].color == color
-      end
-    end
+    pieces.each { |piece| result += piece.valid_moves if piece.color == color }
+    result.empty?
+  end
 
-    result.empty? ? true : false
+  def pieces
+    grid.flatten.compact
   end
 
 end
