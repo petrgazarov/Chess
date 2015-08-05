@@ -72,7 +72,7 @@ class Board
     find_vulnerability(king_pos, color)
   end
 
-  def move(start_pos, end_pos)
+  def move(player_color, start_pos, end_pos)
     raise MoveError.new("No piece on starting position!") unless self[start_pos]
 
     moves = self[start_pos].moves
@@ -80,6 +80,8 @@ class Board
       raise MoveError.new("That piece can't move there!")
     elsif self[start_pos].move_into_check?(end_pos)
       raise MoveError.new("That move would put you in check!")
+    elsif player_color != self[start_pos].color
+      raise MoveError.new("You can only move pieces of your color!")
     end
 
     move!(start_pos, end_pos)

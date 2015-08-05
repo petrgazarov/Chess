@@ -29,7 +29,7 @@ class Game
 
     begin
       move = current_player.get_move
-      board.move(*move)
+      board.move(current_player.color, *move)
     rescue MoveError => e
       puts e.message
       retry
