@@ -76,9 +76,16 @@ class Board
     raise MoveError.new("No piece on starting position!") unless self[start_pos]
 
     valid_moves = self[start_pos].valid_moves
-    raise MoveError.new("That piece can't move there!") unless valid_moves.include?(end_pos)
+    if !valid_moves.include?(end_pos)
+      raise MoveError.new("That piece can't move there!")
+    elsif self[start_pos].move_into_check?(end_pos)
+      raise MoveError.new("That move would put you in check!")
+    end
 
+    move!(start_pos, end_pos)
+  end
 
+  def move!(start_pos, end_pos)
     self[end_pos] = self[start_pos]
     self[end_pos].position = end_pos
     self[start_pos] = nil

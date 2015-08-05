@@ -22,13 +22,13 @@ class Piece
 
   def valid_moves
     moves.select do |pos|
-      Board.on_board?(pos) #&& !move_into_check?(pos)
+      !move_into_check?(pos)
     end
   end
 
   def move_into_check?(pos)
     new_board = board.dup
-    new_board.move(position, pos)
+    new_board.move!(position, pos)
     new_board.in_check?(color)
   end
 end
