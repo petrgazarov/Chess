@@ -71,7 +71,15 @@ class Board
 
 
   def move(start_pos, end_pos)
+    raise MoveError.new("No piece on starting position!") unless self[start_pos]
 
+    valid_moves = self[start_pos].valid_moves
+    raise MoveError.new("That piece can't move there!") unless valid_moves.include?(end_pos)
+
+
+    self[end_pos] = self[start_pos]
+    self[end_pos].position = end_pos
+    self[start_pos] = nil
   end
 
   def [](pos)

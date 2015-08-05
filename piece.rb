@@ -28,7 +28,7 @@ class Piece
   end
 
   def move_into_check?(pos)
-
+    
   end
 
   def moves

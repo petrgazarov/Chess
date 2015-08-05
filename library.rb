@@ -15,9 +15,6 @@ require_relative 'pawn'
 if __FILE__ == $PROGRAM_NAME
 
   test = Board.new
-  test[[2,0]] = King.new([2,6], test, :white)
-  p test[[1,1]].valid_moves
+  test.move([5,0], [4,0])
   test.render
-  p test.in_check?(:white)
-
 end
