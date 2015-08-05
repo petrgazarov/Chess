@@ -15,7 +15,9 @@ require_relative 'pawn'
 if __FILE__ == $PROGRAM_NAME
 
   test = Board.new
-  test[[2,6]] = Queen.new([2,6], test, :white)
+  test[[2, 6]] = Queen.new([2,6], test, :white)
+  test[[1, 5]] = nil
+  test[[1, 7]] = nil
   test.render
-  test.move([1, 5], [2, 5])
+  puts test.checkmate?(:black)
 end

@@ -156,7 +156,15 @@ class Board
   end
 
   def checkmate?(color)
+    result = []
     iterate_through_board do |x, y|
+      pos = [x, y]
+      if self[pos]
+        result += self[pos].valid_moves if self[pos].color == color
+      end
+    end
+
+    result.empty? ? true : false
   end
 
 end
