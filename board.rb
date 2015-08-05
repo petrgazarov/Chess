@@ -50,9 +50,14 @@ class Board
     (0...SIZE).each do |x|
       (0...SIZE).each do |y|
         if self[[x, y]]
-          print self[[x, y]].to_s + " "
+          space = " #{self[[x, y]].to_s} "
         else
-          print "  "
+          space = "   "
+        end
+        if (x.even? && y.even?) || (x.odd? && y.odd?)
+          print space
+        else
+          print space.on_white
         end
       end
       print "\n"
