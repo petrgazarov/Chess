@@ -32,18 +32,20 @@ class Board
   end
 
   def render
-    iterate_through_board do |x, y|
-      if self[[x, y]]
-        space = " #{self[[x, y]].to_s} "
-      else
-        space = "   "
+    (0...SIZE).each do |x|
+      (0...SIZE).each do |y|
+        if self[[x, y]]
+          space = " #{self[[x, y]].to_s} "
+        else
+          space = "   "
+        end
+        if (x.even? && y.even?) || (x.odd? && y.odd?)
+          print space
+        else
+          print space.on_white
+        end
+        print "\n" if y == SIZE - 1
       end
-      if (x.even? && y.even?) || (x.odd? && y.odd?)
-        print space
-      else
-        print space.on_white
-      end
-      print "\n" if y == SIZE - 1
     end
   end
 
@@ -90,9 +92,9 @@ class Board
   end
 
   def find_piece_on_board(piece, color)
-    iterate_through_board do |x, y|
-      if self[[x, y]].is_a?(piece) && self[[x, y]].color == color
-        return [x, y]
+    pieces.each do |piece_on_board|
+      if piece_on_board.is_a?(piece) && piece_on_board.color == color
+        return piece_on_board.position
       end
     end
     false
@@ -103,15 +105,6 @@ class Board
       return true if piece.color != color && piece.moves.include?(pos)
     end
     false
-  end
-
-  def iterate_through_board(&prc)
-    (0...SIZE).each do |x|
-      (0...SIZE).each do |y|
-        prc.call(x, y)
-      end
-    end
-    nil
   end
 
   def checkmate?(color)
