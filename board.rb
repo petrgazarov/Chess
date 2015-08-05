@@ -67,20 +67,9 @@ class Board
 
   def in_check?(color)
     king_pos = find_piece_on_board(King, color)
+    find_vulnerability(king_pos, color)
 
   end
-
-  def find_piece_on_board(piece, color)
-    (0...SIZE).each do |x|
-      (0...SIZE).each do |y|
-        if self[[x, y]].is_a?(piece) && self[[x, y]].color == color
-          return [x, y]
-        end
-      end
-    end
-    false
-  end
-
 
 
   def move(start_pos, end_pos)
@@ -111,6 +100,7 @@ class Board
   end
 
   private
+
   def assign_duped_board
     self.each do |row|
       row.each do |square|
@@ -119,4 +109,37 @@ class Board
     end
     self
   end
+
+  def find_piece_on_board(piece, color)
+    (0...SIZE).each do |x|
+      (0...SIZE).each do |y|
+        if self[[x, y]].is_a?(piece) && self[[x, y]].color == color
+          return [x, y]
+        end
+      end
+    end
+    false
+  end
+
+  def find_vulnerability(pos, color)
+    iterate_through_board do |x, y|
+      if self[[x,y]] &&
+          self[[x, y]].color != color &&
+          self[[x, y]].valid_moves.include?(pos)
+        return true
+      end
+    end
+  end
+
+
+
+  def iterate_through_board(&prc)
+    (0...SIZE).each do |x|
+      (0...SIZE).each do |y|
+        prc.call(x, y)
+      end
+    end
+    nil
+  end
+
 end
