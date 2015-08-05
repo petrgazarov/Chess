@@ -33,7 +33,7 @@ class Game
     rescue MoveError => e
       puts e.message
       retry
-
+    end
     switch_players
   end
 

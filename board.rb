@@ -117,15 +117,6 @@ class Board
     new_board
   end
 
-  # def assign_duped_board
-  #   grid.each do |row|
-  #     row.each do |square|
-  #       square ? square.board = self : nil
-  #     end
-  #   end
-  #   self
-  # end
-
   def find_piece_on_board(piece, color)
     iterate_through_board do |x, y|
       if self[[x, y]].is_a?(piece) && self[[x, y]].color == color

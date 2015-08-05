@@ -1,9 +1,9 @@
 class Pawn < Piece
 
-  attr_accessor :first
+  attr_reader :first_pos
 
   def initialize(pos, board, color)
-    @first = true
+    @first_pos = pos.dup
     super(pos, board, color)
   end
 
@@ -12,7 +12,7 @@ class Pawn < Piece
     x, y = position[0], position[1]
     color == :black ? direction = 1 : direction = -1
     result << [x + direction, y] unless occupied?([x + direction, y])
-    result << [x + direction * 2, y] unless first == false ||
+    result << [x + direction * 2, y] unless first_pos != position ||
       occupied?([x + direction * 2, y])
 
     pawn_capture_deltas = [[direction, -1], [direction, 1]]
@@ -22,8 +22,6 @@ class Pawn < Piece
         occupied?(pos) &&
         board[pos].color != color
     end
-
-    self.first = false
     result
   end
 

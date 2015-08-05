@@ -26,7 +26,8 @@ class HumanPlayer < Player
 
     validate(pos)
   rescue ArgumentError
-    puts "The input should be integers."
+    puts "The input should be integers. Please try again:"
+    retry
   rescue InputError => e
     puts e.message
     retry
