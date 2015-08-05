@@ -75,8 +75,8 @@ class Board
   def move(start_pos, end_pos)
     raise MoveError.new("No piece on starting position!") unless self[start_pos]
 
-    valid_moves = self[start_pos].valid_moves
-    if !valid_moves.include?(end_pos)
+    moves = self[start_pos].moves
+    if !moves.include?(end_pos)
       raise MoveError.new("That piece can't move there!")
     elsif self[start_pos].move_into_check?(end_pos)
       raise MoveError.new("That move would put you in check!")
@@ -139,7 +139,7 @@ class Board
     iterate_through_board do |x, y|
       if self[[x,y]] &&
           self[[x, y]].color != color &&
-          self[[x, y]].valid_moves.include?(pos)
+          self[[x, y]].moves.include?(pos)
         return true
       end
     end
@@ -153,6 +153,10 @@ class Board
       end
     end
     nil
+  end
+
+  def checkmate?(color)
+    iterate_through_board do |x, y|
   end
 
 end
