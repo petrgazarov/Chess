@@ -48,20 +48,18 @@ class Board
   end
 
   def render
-    (0...SIZE).each do |x|
-      (0...SIZE).each do |y|
-        if self[[x, y]]
-          space = " #{self[[x, y]].to_s} "
-        else
-          space = "   "
-        end
-        if (x.even? && y.even?) || (x.odd? && y.odd?)
-          print space
-        else
-          print space.on_white
-        end
+    iterate_through_board do |x, y|
+      if self[[x, y]]
+        space = " #{self[[x, y]].to_s} "
+      else
+        space = "   "
       end
-      print "\n"
+      if (x.even? && y.even?) || (x.odd? && y.odd?)
+        print space
+      else
+        print space.on_white
+      end
+      print "\n" if y == SIZE - 1
     end
   end
 
@@ -111,11 +109,9 @@ class Board
   end
 
   def find_piece_on_board(piece, color)
-    (0...SIZE).each do |x|
-      (0...SIZE).each do |y|
-        if self[[x, y]].is_a?(piece) && self[[x, y]].color == color
-          return [x, y]
-        end
+    iterate_through_board do |x, y|
+      if self[[x, y]].is_a?(piece) && self[[x, y]].color == color
+        return [x, y]
       end
     end
     false
