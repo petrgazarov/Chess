@@ -15,7 +15,6 @@ require_relative 'pawn'
 if __FILE__ == $PROGRAM_NAME
 
   test = Board.new
-  test.populate
   test.render
 
 end

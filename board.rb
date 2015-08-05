@@ -9,6 +9,7 @@ class Board
 
   def initialize
     @grid = Array.new(SIZE) { Array.new(SIZE) }
+    populate
   end
 
   def populate
@@ -65,8 +66,22 @@ class Board
   end
 
   def in_check?(color)
+    king_pos = find_piece_on_board(King, color)
 
   end
+
+  def find_piece_on_board(piece, color)
+    (0...SIZE).each do |x|
+      (0...SIZE).each do |y|
+        if self[[x, y]].is_a?(piece) && self[[x, y]].color == color
+          return [x, y]
+        end
+      end
+    end
+    false
+  end
+
+
 
   def move(start_pos, end_pos)
 
