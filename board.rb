@@ -82,7 +82,7 @@ class Board
   end
 
   def dup
-    new_board = Board.new
+    new_board = Board.new(false)
     pieces.each { |piece| new_board[piece.position] = piece.dup(new_board) }
     new_board
   end
