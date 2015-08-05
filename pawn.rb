@@ -37,10 +37,10 @@ class Pawn < Piece
       pos = [x + delta[0], y + delta[1]]
       result << pos if Board.on_board?(pos) &&
         occupied?(pos) &&
-        board[pos].color != color
+        !same_color?(board[pos].color)
     end
 
-    result = []
+    result
   end
 
   def to_s

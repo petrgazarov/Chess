@@ -102,7 +102,7 @@ class Game
 
   def declare_winner
     switch_players
-    puts "#{current_player} wins!"
+    puts "#{current_player.name} wins!"
   end
 
   def won?
