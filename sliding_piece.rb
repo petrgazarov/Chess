@@ -18,22 +18,20 @@ class SlidingPiece < Piece
   def make_branch(delta)
     result = []
     1.upto(Board::SIZE - 1) do |idx|
-      x = delta[0] * idx + position[0]
-      y = delta[1] * idx + position[1]
+      pos = [(delta[0] * idx + position[0]), (delta[1] * idx + position[1])]
 
-      return result if !Board.on_board?([x, y])
+      return result if !Board.on_board?(pos)
 
-      if board[[x, y]] && board[[x, y]].color == color
+      if board[pos] && board[pos].same_color?(color)
         return result
-      elsif board[[x, y]] && board[[x, y]].color != color
-        result << [x, y]
+      elsif board[pos] && !board[pos].same_color?(color)
+        result << pos
         return result
       end
 
-      result << [x, y]
+      result << pos
     end
 
     result
   end
-
 end

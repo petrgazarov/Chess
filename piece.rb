@@ -35,4 +35,8 @@ class Piece
   def dup(board)
     self.class.new(position, board, color)
   end
+
+  def same_color?(other_color)
+    color == other_color
+  end
 end

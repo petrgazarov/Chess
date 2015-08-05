@@ -58,13 +58,13 @@ class Board
     raise MoveError.new("No piece on starting position!") unless self[start_pos]
 
     moves = self[start_pos].moves
-    if start_pos ==  end_pos
+    if start_pos == end_pos
       raise MoveError.new("You must move your piece!")
     elsif !moves.include?(end_pos)
       raise MoveError.new("That piece can't move there!")
     elsif self[start_pos].move_into_check?(end_pos)
       raise MoveError.new("That move would put you in check!")
-    elsif player_color != self[start_pos].color
+    elsif !self[start_pos].same_color?(player_color)
       raise MoveError.new("You can only move pieces of your color!")
     end
 
@@ -93,7 +93,7 @@ class Board
 
   def find_piece_on_board(piece, color)
     pieces.each do |piece_on_board|
-      if piece_on_board.is_a?(piece) && piece_on_board.color == color
+      if piece_on_board.is_a?(piece) && piece_on_board.same_color?(color)
         return piece_on_board.position
       end
     end
@@ -102,21 +102,20 @@ class Board
 
   def find_vulnerability(pos, color)
     pieces.each do |piece|
-      return true if piece.color != color && piece.moves.include?(pos)
+      return true if !piece.same_color?(color) && piece.moves.include?(pos)
     end
     false
   end
 
   def checkmate?(color)
     result = []
-    pieces.each { |piece| result += piece.valid_moves if piece.color == color }
+    pieces.each { |piece| result += piece.valid_moves if piece.same_color?(color) }
     result.empty?
   end
 
   def pieces
     grid.flatten.compact
   end
-
 end
 
 class MoveError < StandardError
