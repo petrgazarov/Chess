@@ -11,6 +11,7 @@ require_relative 'bishop'
 require_relative 'knight'
 require_relative 'rook'
 require_relative 'pawn'
+require_relative 'player'
 
 if __FILE__ == $PROGRAM_NAME
 
