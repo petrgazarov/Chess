@@ -24,6 +24,9 @@ class Game
   end
 
   def play_turn
+    board.render
+    current_player.get_move
+
 
     switch_players
   end
