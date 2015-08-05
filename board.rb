@@ -7,9 +7,13 @@ class Board
 
   attr_accessor :grid
 
-  def initialize
-    @grid = Array.new(SIZE) { Array.new(SIZE) }
-    populate
+  def initialize(grid = nil)
+    if grid
+      @grid = grid
+    else
+      @grid = Array.new(SIZE) { Array.new(SIZE) }
+      populate
+    end
   end
 
   def populate
@@ -66,9 +70,7 @@ class Board
   def in_check?(color)
     king_pos = find_piece_on_board(King, color)
     find_vulnerability(king_pos, color)
-
   end
-
 
   def move(start_pos, end_pos)
     raise MoveError.new("No piece on starting position!") unless self[start_pos]
@@ -91,24 +93,25 @@ class Board
   end
 
   def dup
-    new_board = self.map do |row|
+    new_board = Board.new
+
+    new_board.grid = grid.map do |row|
       row.map do |square|
         if square
           new_piece = square.dup
-          new_piece.pos = square.position.dup
+          new_piece.position = square.position.dup
           new_piece
         else
           nil
         end
       end
     end
+
     new_board.assign_duped_board
   end
 
-  private
-
   def assign_duped_board
-    self.each do |row|
+    grid.each do |row|
       row.each do |square|
         square ? square.board = self : nil
       end
@@ -134,8 +137,6 @@ class Board
       end
     end
   end
-
-
 
   def iterate_through_board(&prc)
     (0...SIZE).each do |x|

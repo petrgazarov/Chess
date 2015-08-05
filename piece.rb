@@ -28,10 +28,8 @@ class Piece
   end
 
   def move_into_check?(pos)
-    
-  end
-
-  def moves
-
+    new_board = board.dup
+    new_board.move(position, pos)
+    new_board.in_check?(color)
   end
 end
