@@ -26,6 +26,7 @@ class Game
 
   def play_turn
     board.render
+    puts "#{current_player.name}'s turn!"
 
     begin
       move = current_player.get_move
