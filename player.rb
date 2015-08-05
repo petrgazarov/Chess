@@ -10,16 +10,17 @@ end
 class HumanPlayer < Player
 
   def get_move
-    prompt("starting")
-    starting_pos = get_pos
+    read_char
 
-    prompt("ending")
-    ending_pos = get_pos
+    # prompt("starting")
+    # starting_pos = get_pos
+    #
+    # prompt("ending")
+    # ending_pos = get_pos
+    #
+    # [starting_pos, ending_pos]
 
-    [starting_pos, ending_pos]
   end
-
-  private
 
   def get_pos
     pos = gets.chomp.split(",")

@@ -27,7 +27,8 @@ class Board
     end
   end
 
-  def render
+  def render(cursor_pos = nil)
+    system "clear" or system "cls"
     (0...SIZE).each do |x|
       (0...SIZE).each do |y|
         if self[[x, y]]
@@ -35,7 +36,9 @@ class Board
         else
           space = "   "
         end
-        if (x.even? && y.even?) || (x.odd? && y.odd?)
+        if [x, y] == cursor_pos
+          print space.on_red
+        elsif (x.even? && y.even?) || (x.odd? && y.odd?)
           print space
         else
           print space.on_white
