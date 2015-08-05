@@ -139,3 +139,6 @@ class Board
   end
 
 end
+
+class MoveError < StandardError
+end
