@@ -10,17 +10,17 @@ class HumanPlayer < Player
 
   def get_move
     prompt("starting")
-    starting_pos = get_input
+    starting_pos = get_pos
 
     prompt("ending")
-    ending_pos = get_input
+    ending_pos = get_pos
 
     [starting_pos, ending_pos]
   end
 
   private
 
-  def get_input
+  def get_pos
     pos = gets.chomp.split(",")
 
     validate(pos)

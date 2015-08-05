@@ -25,8 +25,13 @@ class Game
 
   def play_turn
     board.render
-    current_player.get_move
 
+    begin
+      move = current_player.get_move
+      board.move(*move)
+    rescue MoveError => e
+      puts e.message
+      retry
 
     switch_players
   end
