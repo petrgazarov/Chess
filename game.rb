@@ -8,7 +8,7 @@ class Game
     @current_player = player_white
   end
 
-  def switch_players!
+  def switch_players
     if current_player == player_white
       self.current_player = player_black
     else
@@ -16,4 +16,20 @@ class Game
     end
   end
 
+  def play
+    until won?
+      play_turn
+    end
+    declare_winner
+  end
+
+  def play_turn
+
+    switch_players
+  end
+
+  def declare_winner
+    switch_players
+    puts "#{current_player} wins!"
+  end
 end
