@@ -43,5 +43,4 @@ class Piece
   def occupied?(pos)
     board[pos]
   end
-
 end

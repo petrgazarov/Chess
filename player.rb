@@ -54,5 +54,4 @@ class ComputerPlayer < Player
 end
 
 class InputError < StandardError
-
 end
