@@ -93,29 +93,31 @@ class Board
   end
 
   def dup
-    new_grid = grid.map do |row|
-      row.map do |square|
+    new_board = Board.new
+
+    grid.each_with_index do |row, x|
+      row.each_with_index do |square, y|
         if square
-          new_piece = square.dup
-          new_piece.position = square.position.dup
-          new_piece
+          new_board[[x, y]] = square.dup
+          new_board[[x, y]].position = square.position.dup
+          new_board[[x, y]].board = new_board
         else
-          nil
+          new_board[[x, y]] = nil
         end
       end
     end
 
-    Board.new(new_grid).assign_duped_board
+    new_board
   end
 
-  def assign_duped_board
-    grid.each do |row|
-      row.each do |square|
-        square ? square.board = self : nil
-      end
-    end
-    self
-  end
+  # def assign_duped_board
+  #   grid.each do |row|
+  #     row.each do |square|
+  #       square ? square.board = self : nil
+  #     end
+  #   end
+  #   self
+  # end
 
   def find_piece_on_board(piece, color)
     iterate_through_board do |x, y|
