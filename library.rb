@@ -15,10 +15,6 @@ require_relative 'player'
 
 if __FILE__ == $PROGRAM_NAME
 
-  test = Board.new
-  test[[2, 6]] = Queen.new([2,6], test, :white)
-  test[[1, 5]] = nil
-  test[[1, 7]] = nil
-  test.render
-  puts test.checkmate?(:black)
+  Game.new("Petr", "Ryan")
+
 end

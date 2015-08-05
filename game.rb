@@ -3,9 +3,10 @@ class Game
 
   def initialize(name1, name2)
     @board = Board.new
-    @player_white = HumanPlayer.new(name1)
-    @player_black = HumanPlayer.new(name2)
+    @player_white = HumanPlayer.new(name1, :white)
+    @player_black = HumanPlayer.new(name2, :black)
     @current_player = player_white
+    play
   end
 
   def switch_players
@@ -39,5 +40,9 @@ class Game
   def declare_winner
     switch_players
     puts "#{current_player} wins!"
+  end
+
+  def won?
+    board.checkmate?(current_player.color)
   end
 end
