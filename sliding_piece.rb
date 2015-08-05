@@ -9,10 +9,6 @@ class SlidingPiece < Piece
     result
   end
 
-  def occupied?(pos)
-    board[pos]
-  end
-
   private
 
   def make_branch(delta)
@@ -22,10 +18,8 @@ class SlidingPiece < Piece
 
       return result if !Board.on_board?(pos)
 
-      if board[pos] && board[pos].same_color?(color)
-        return result
-      elsif board[pos] && !board[pos].same_color?(color)
-        result << pos
+      if occupied?(pos)
+        result << pos if !board[pos].same_color?(color)
         return result
       end
 

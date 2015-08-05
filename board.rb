@@ -9,12 +9,8 @@ class Board
   attr_accessor :grid
 
   def initialize(should_populate = true)
-    if grid
-      @grid = grid
-    else
-      @grid = Array.new(SIZE) { Array.new(SIZE) }
-      [:white, :black].each { |color| populate(color) }
-    end
+    @grid = Array.new(SIZE) { Array.new(SIZE) }
+    [:white, :black].each { |color| populate(color) } if should_populate
   end
 
   def populate(color)

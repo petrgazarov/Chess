@@ -39,4 +39,9 @@ class Piece
   def same_color?(other_color)
     color == other_color
   end
+
+  def occupied?(pos)
+    board[pos]
+  end
+
 end

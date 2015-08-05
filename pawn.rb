@@ -9,12 +9,28 @@ class Pawn < Piece
 
   def moves
     result = []
-    x, y = position
     direction = (color == :black ? 1 : -1)
+
+    result += normal_moves(direction)
+    result += capture_moves(direction)
+
+    result
+  end
+
+  def normal_moves(direction)
+    x, y = position
+    result = []
 
     result << [x + direction, y] unless occupied?([x + direction, y])
     result << [x + direction * 2, y] unless first_pos != position ||
       occupied?([x + direction * 2, y])
+
+    result
+  end
+
+  def capture_moves(direction)
+    x, y = position
+    result = []
 
     pawn_capture_deltas = [[direction, -1], [direction, 1]]
     pawn_capture_deltas.each do |delta|
@@ -23,11 +39,8 @@ class Pawn < Piece
         occupied?(pos) &&
         board[pos].color != color
     end
-    result
-  end
 
-  def occupied?(pos)
-    board[pos]
+    result = []
   end
 
   def to_s

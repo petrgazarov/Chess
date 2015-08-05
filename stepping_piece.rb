@@ -7,7 +7,7 @@ class SteppingPiece < Piece
 
     positions.each do |pos|
       if Board.on_board?(pos)
-        next if board[pos] && board[pos].same_color?(color)
+        next if occupied?(pos) && board[pos].same_color?(color)
         result << pos
       end
     end
