@@ -22,8 +22,7 @@ class Piece
 
   def valid_moves
     moves.select do |pos|
-      Board.on_board?(pos) &&
-        !move_into_check?(pos)
+      Board.on_board?(pos) #&& !move_into_check?(pos)
     end
   end
 

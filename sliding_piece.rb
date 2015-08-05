@@ -21,7 +21,7 @@ class SlidingPiece < Piece
       x = delta[0] * idx + position[0]
       y = delta[1] * idx + position[1]
 
-      return result if board[[x, y]]
+      return result if !Board.on_board?([x, y]) || board[[x, y]]
       result << [x, y]
     end
 

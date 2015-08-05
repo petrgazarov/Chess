@@ -2,7 +2,7 @@ class Board
   SIZE = 8
 
   def self.on_board?(pos)
-    pos.all? { |coord| coord.between?(0,SIZE) }
+    pos.all? { |coord| coord.between?(0, SIZE - 1) }
   end
 
   attr_accessor :grid
@@ -93,9 +93,7 @@ class Board
   end
 
   def dup
-    new_board = Board.new
-
-    new_board.grid = grid.map do |row|
+    new_grid = grid.map do |row|
       row.map do |square|
         if square
           new_piece = square.dup
@@ -107,7 +105,7 @@ class Board
       end
     end
 
-    new_board.assign_duped_board
+    Board.new(new_grid).assign_duped_board
   end
 
   def assign_duped_board
