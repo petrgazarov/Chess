@@ -15,5 +15,6 @@ require_relative 'pawn'
 if __FILE__ == $PROGRAM_NAME
 
   test = Board.new
-  test[[1,1]].move_into_check?([2,1])
+  test.render
+  p test[[1,1]].move_into_check?([2,1])
 end

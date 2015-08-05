@@ -134,6 +134,7 @@ class Board
         return true
       end
     end
+    false
   end
 
   def iterate_through_board(&prc)
