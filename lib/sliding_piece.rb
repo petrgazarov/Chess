@@ -1,5 +1,4 @@
 class SlidingPiece < Piece
-
   def moves
     result = []
     deltas.each do |delta|

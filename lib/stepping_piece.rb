@@ -1,5 +1,4 @@
 class SteppingPiece < Piece
-
   def moves
     result = []
     x, y = position

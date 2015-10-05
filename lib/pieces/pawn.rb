@@ -1,5 +1,4 @@
 class Pawn < Piece
-
   attr_reader :first_pos
 
   def initialize(pos, board, color)

@@ -29,6 +29,7 @@ class Board
 
   def render(cursor_pos = nil)
     system "clear" or system "cls"
+
     (0...SIZE).each do |x|
       (0...SIZE).each do |y|
         if self[[x, y]]
@@ -96,6 +97,7 @@ class Board
         return piece_on_board.position
       end
     end
+
     false
   end
 
@@ -103,6 +105,7 @@ class Board
     pieces.each do |piece|
       return true if !piece.same_color?(color) && piece.moves.include?(pos)
     end
+
     false
   end
 

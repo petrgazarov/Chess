@@ -7,6 +7,7 @@ class Game
     @player_black = HumanPlayer.new(name2, :black)
     @current_player = player_white
     @cursor = [7, 7]
+
     play
   end
 
@@ -57,6 +58,7 @@ class Game
 
   def action(char)
     case char
+
     when "\e[A"
       cursor_up
     when "\e[B"
