@@ -48,6 +48,7 @@ class Game
     until keystroke == "\r"
       keystroke = current_player.get_move
       action(keystroke)
+      check_cursor
       board.render(cursor)
     end
 
@@ -95,8 +96,9 @@ class Game
 
   def check_cursor
     self.cursor.map! do |coord|
-      coord = Board::SIZE - 1 if coord > Board::SIZE
+      coord = Board::SIZE - 1 if coord >= Board::SIZE
       coord = 0 if coord < 0
+      coord
     end
   end
 

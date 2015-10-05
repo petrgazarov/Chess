@@ -11,15 +11,6 @@ class HumanPlayer < Player
 
   def get_move
     read_char
-
-    # prompt("starting")
-    # starting_pos = get_pos
-    #
-    # prompt("ending")
-    # ending_pos = get_pos
-    #
-    # [starting_pos, ending_pos]
-
   end
 
   def get_pos
@@ -43,12 +34,6 @@ class HumanPlayer < Player
   def prompt(move)
     puts "Please enter your #{move} position."
     print " >"
-  end
-
-end
-
-class ComputerPlayer < Player
-  def prompt
   end
 end
 
