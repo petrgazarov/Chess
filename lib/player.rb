@@ -48,9 +48,7 @@ class HumanPlayer < Player
 end
 
 class ComputerPlayer < Player
-
   def prompt
-
   end
 end
 

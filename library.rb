@@ -1,21 +1,19 @@
 require 'byebug'
 require 'colorize'
-require_relative 'keypress'
-require_relative 'game'
-require_relative 'piece'
-require_relative 'stepping_piece'
-require_relative 'sliding_piece'
-require_relative 'king'
-require_relative 'queen'
-require_relative 'bishop'
-require_relative 'knight'
-require_relative 'rook'
-require_relative 'pawn'
-require_relative 'player'
-require_relative 'board'
+require './lib/piece'
+require './lib/stepping_piece'
+require './lib/sliding_piece'
+require './lib/pieces/king'
+require './lib/pieces/queen'
+require './lib/pieces/bishop'
+require './lib/pieces/knight'
+require './lib/pieces/rook'
+require './lib/pieces/pawn'
+require './lib/keypress'
+require './lib/game'
+require './lib/player'
+require './lib/board'
 
 if __FILE__ == $PROGRAM_NAME
-
-  Game.new("Petr", "Ryan")
-
+  Game.new("White", "Black")
 end
