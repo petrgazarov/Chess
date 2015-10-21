@@ -12,7 +12,7 @@ RSpec.describe Bishop do
 
   describe "#moves" do
     context "when position is [3, 3] on empty board" do
-      let(:moves) { bishop_empty_board_positions }
+      let(:moves) { bishop_empty_board_moves }
 
       it "returns correct possible moves" do
         extend ExampleHelpers
@@ -23,7 +23,7 @@ RSpec.describe Bishop do
     end
 
     context "when position is [3, 3] on board with initial setup" do
-      let(:moves) { bishop_initial_setup_board_positions }
+      let(:moves) { bishop_initial_setup_board_moves }
 
       it "returns correct possible moves" do
         extend ExampleHelpers

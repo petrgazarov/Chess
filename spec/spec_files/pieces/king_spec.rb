@@ -12,7 +12,7 @@ RSpec.describe King do
 
   describe "#moves" do
     context "when position is [3, 3] on empty board" do
-      let(:moves) { king_empty_board_positions }
+      let(:moves) { king_empty_board_moves }
 
       it "returns correct possible moves" do
         extend ExampleHelpers
@@ -23,7 +23,7 @@ RSpec.describe King do
     end
 
     context "when position is [5, 2] on board with initial setup" do
-      let(:moves) { king_initial_setup_board_positions }
+      let(:moves) { king_initial_setup_board_moves }
 
       it "returns correct possible moves" do
         extend ExampleHelpers
