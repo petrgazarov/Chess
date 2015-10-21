@@ -13,9 +13,18 @@ module ExampleHelpers
   def king_empty_board_positions
     [[2, 2], [2, 3], [2, 4], [3, 2], [3, 4], [4, 2], [4, 3], [4, 4]]
   end
+
   # piece position [5, 2]
   def king_initial_setup_board_positions
     [[5, 1], [4, 1], [4, 2], [4, 3], [5, 3]]
+  end
+
+  def knight_empty_board_positions
+    [[1, 2], [1, 4], [2, 1], [4, 1], [5, 2], [5, 4], [4, 5], [2, 5]]
+  end
+
+  def knight_initial_setup_board_positions
+    [[1, 2], [1, 4], [2, 1], [4, 1], [5, 2], [5, 4], [4, 5], [2, 5]]
   end
 
   def set_up_allow_for_piece(subject_piece, board, black_piece, white_piece)
