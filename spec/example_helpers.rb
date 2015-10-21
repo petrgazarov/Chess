@@ -35,6 +35,24 @@ module ExampleHelpers
     [[1, 2], [1, 4]]
   end
 
+  def queen_empty_board_moves
+    rook_empty_board_moves + bishop_empty_board_moves
+  end
+
+  def queen_initial_setup_board_moves
+    rook_initial_setup_board_moves + bishop_initial_setup_board_moves
+  end
+
+  def rook_empty_board_moves
+    [[2, 3], [1, 3], [0, 3], [4, 3], [5, 3], [6, 3], [7, 3],
+     [3, 2], [3, 1], [3, 0], [3, 4], [3, 5], [3, 6], [3, 7]]
+  end
+
+  def rook_initial_setup_board_moves
+    [[2, 3], [1, 3], [4, 3], [5, 3], [3, 2], [3, 1],
+     [3, 0], [3, 4], [3, 5], [3, 6], [3, 7]]
+  end
+
   def set_up_allow_for_piece(subject_piece, board, black_piece, white_piece)
     allow(subject_piece).to receive(:occupied?) do |pos|
       occupied = [
