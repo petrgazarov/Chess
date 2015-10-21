@@ -17,13 +17,13 @@ NB: If you don't have Ruby, you can download it using simple instructions [here]
 The game is played via keyboard input. To pick a piece, use arrow keys for navigation on the board and 'enter' for selection. Repeat for destination cell.
 
 * Download the repo
-* Install the colorize gem. On a mac, you can run the following command from the root folder of the game:
+* Navigate to the Chess folder and run:
 
 ```
-$ gem install colorize
+$ bundle install
 ```
 
-You are ready to play the game! :)
+You are now ready to play the game! :)
 ```
 $ ruby play.rb
 ```

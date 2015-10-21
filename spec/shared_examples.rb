@@ -3,7 +3,7 @@ RSpec.shared_examples "empty_board" do
 end
 
 RSpec.shared_examples "initial_board" do
-  let(:initial_board) { double(:initial_board, empty: true) }
+  let(:initial_board) { double(:initial_board) }
 end
 
 RSpec.shared_examples "pos" do
@@ -11,5 +11,9 @@ RSpec.shared_examples "pos" do
 end
 
 RSpec.shared_examples "black_piece" do
-  let(:black_piece) { double(:black_piece, same_color) }
+  let(:black_piece) { double(:black_piece) }
+end
+
+RSpec.shared_examples "white_piece" do
+  let(:white_piece) { double(:white_piece) }
 end
