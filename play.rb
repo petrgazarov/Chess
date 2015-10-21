@@ -12,6 +12,7 @@ require './lib/pieces/pawn'
 require './lib/keypress'
 require './lib/game'
 require './lib/player'
+require './lib/human_player'
 require './lib/board'
 
 if __FILE__ == $PROGRAM_NAME
