@@ -25,7 +25,7 @@ $ gem install colorize
 
 You are ready to play the game! :)
 ```
-$ ruby library.rb
+$ ruby play.rb
 ```
 
 ##To-Dos
