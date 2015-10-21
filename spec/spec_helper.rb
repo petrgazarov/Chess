@@ -22,6 +22,15 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  # Use color in STDOUT
+  config.color = true
+
+  # Use color not only in STDOUT but also in pagers and files
+  config.tty = true
+
+  # Use the specified formatter
+  config.formatter = :documentation # :progress, :html, :textmate
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
@@ -77,17 +86,9 @@ RSpec.configure do |config|
 =end
 end
 
-RSpec.shared_examples "empty_board" do
-  let(:empty_board) { double(:empty_board, empty: true) }
-end
+# loads shared examples for all specs
+require_relative 'shared_examples'
 
-RSpec.shared_examples "initial_board" do
-  let(:initial_board) { double(:initial_board, empty: true) }
-end
-
-RSpec.shared_examples "pos" do
-  let(:pos) { double(:pos) }
-end
-
+# make sure we have the path to run specs
 libdir = File.expand_path("")
 $LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
