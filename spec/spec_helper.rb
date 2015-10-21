@@ -77,10 +77,17 @@ RSpec.configure do |config|
 =end
 end
 
-RSpec.shared_examples "board" do
-  let(:board) { double(:board, add_piece: nil, empty?: true) }
+RSpec.shared_examples "empty_board" do
+  let(:empty_board) { double(:empty_board, empty: true) }
+end
+
+RSpec.shared_examples "initial_board" do
+  let(:initial_board) { double(:initial_board, empty: true) }
 end
 
 RSpec.shared_examples "pos" do
   let(:pos) { double(:pos) }
 end
+
+libdir = File.expand_path("")
+$LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
