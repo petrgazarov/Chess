@@ -95,6 +95,29 @@ module ExampleHelpers
     end
   end
 
+  def declare_expect_for_dupped_board(orig_board, dupp_board, check_pieces_dup = true)
+    # expects grid to be a square matrix
+
+    0.upto(orig_board.grid.length - 1) do |row|
+      0.upto(orig_board.grid[0].length - 1) do |col|
+        orig_board_cell = orig_board.grid[row][col]
+        dup_board_cell = dupp_board.grid[row][col]
+
+        if orig_board_cell.nil?
+          return false if !dup_board_cell.nil?
+        elsif check_pieces_dup
+          return false if orig_board_cell == dup_board_cell
+        elsif orig_board_cell.class != dup_board_cell.class           ||
+                orig_board_cell.position != dup_board_cell.position   ||
+                orig_board_cell.color != dup_board_cell.color
+          return false
+        end
+
+        true
+      end
+    end
+  end
+
   def board_in_check(checkmate = false)
     board = Board.new
     grid = board.grid

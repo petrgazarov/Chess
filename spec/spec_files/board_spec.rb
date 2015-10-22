@@ -134,9 +134,23 @@ RSpec.describe Board do
   end
 
   describe "#dup" do
-    it "creates a new board instance"
-    it "copies layout of the original board"
-    it "calls #dup on each of the Pieces on the original board"
+    it "creates a new board instance" do
+      extend ExampleHelpers
+
+      expect(board_before_check.dup).not_to equal(board_before_check)
+    end
+    it "copies layout of the original board" do
+      extend ExampleHelpers
+
+      dupped_board = board_before_check.dup
+      declare_expect_for_dupped_board(board_before_check, dupped_board, false)
+    end
+    it "calls #dup on each of the Pieces on the original board" do
+      extend ExampleHelpers
+
+      dupped_board = board_before_check.dup
+      declare_expect_for_dupped_board(board_before_check, dupped_board)
+    end
   end
 
   describe "#checkmate?" do
@@ -145,6 +159,10 @@ RSpec.describe Board do
 
       expect(board_in_check(true).checkmate?(:white)).to eq(true)
     end
-    it "return false if there is no checkmate"
+    it "return false if there is no checkmate" do
+      extend ExampleHelpers
+
+      expect(board_in_check.checkmate?(:white)).to eq(false)
+    end
   end
 end
