@@ -3,6 +3,8 @@ require 'example_group_helpers'
 require 'example_helpers'
 
 RSpec.describe Board do
+  extend ExampleGroupHelpers
+
   describe "::on_board?" do
     it "returns false when position is not on the board" do
       expect(Board.on_board?([0, Board::SIZE + 1])).to eq false
@@ -13,14 +15,44 @@ RSpec.describe Board do
   end
 
   describe "#initialize" do
-    context "when called without arguments" do
-      it "populates white pieces correctly"
-      it "populates black pieces correctly"
-      it "does not populate spaces that should be empty at game start"
+    it "sets grid attribute to a matrix array equal in length to board's SIZE constant" do
+      empty_initialized_board = Board.new(false)
+
+      expect(empty_initialized_board.grid.length).to eq(Board::SIZE)
+      empty_initialized_board.grid.each do |row|
+        expect(row.length).to eq(Board::SIZE)
+      end
     end
 
     context "when passed a 'false' argument" do
-      it "does not populate the board"
+      it "does not populate the board" do
+        empty_initialized_board = Board.new(false)
+
+        expect(empty_initialized_board.grid.flatten.compact).to be_empty
+      end
+    end
+
+    context "when called without arguments" do
+      before (:all) do
+        @initialized_board_with_setup = Board.new
+        @grid = @initialized_board_with_setup.grid
+      end
+
+      it "populates white pieces correctly" do
+        extend ExampleHelpers
+
+        declare_expect_for_populating_board(@grid, :white)
+      end
+      it "populates black pieces correctly" do
+        extend ExampleHelpers
+
+        declare_expect_for_populating_board(@grid, :black)
+      end
+      it "does not populate spaces that should be empty at game start" do
+        2.upto(5) do |i|
+          expect(@grid[i].compact).to be_empty
+        end
+      end
     end
   end
 

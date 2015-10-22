@@ -78,4 +78,20 @@ module ExampleHelpers
     allow(white_piece).to receive(:color).and_return(:white)
     allow(pawn).to receive(:first_pos).and_return []
   end
+
+  def declare_expect_for_populating_board(grid, color)
+      row = color == :white ? 7 : 0
+      pawn_row = color == :white ? 6 : 1
+
+      grid[pawn_row].each do |pawn|
+      expect(pawn).to be_a(Pawn)
+    end
+    grid[row].each_with_index do |piece, idx|
+      expect(piece).to be_a(Rook) if idx == 0 || idx == 7
+      expect(piece).to be_a(Knight) if idx == 1 || idx == 6
+      expect(piece).to be_a(Bishop) if idx == 2 || idx == 5
+      expect(piece).to be_a(Queen) if idx == 3
+      expect(piece).to be_a(King) if idx == 4
+    end
+  end
 end
