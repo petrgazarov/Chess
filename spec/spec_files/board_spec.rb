@@ -3,7 +3,7 @@ require 'example_group_helpers'
 require 'example_helpers'
 
 RSpec.describe Board do
-  extend ExampleGroupHelpers
+  include_examples("initial_board")
 
   describe "::on_board?" do
     it "returns false when position is not on the board" do
@@ -34,8 +34,8 @@ RSpec.describe Board do
 
     context "when called without arguments" do
       before (:all) do
-        @initialized_board_with_setup = Board.new
-        @grid = @initialized_board_with_setup.grid
+        initialized_board_with_setup = Board.new
+        @grid = initialized_board_with_setup.grid
       end
 
       it "populates white pieces correctly" do
@@ -57,15 +57,18 @@ RSpec.describe Board do
   end
 
   describe "#in_check?" do
-    it "calls #find_piece_on_board"
-    it "calls #find_vulnerability"
-
     context "when king is in check" do
-      it "returns true"
+      it "returns true" do
+        extend ExampleHelpers
+
+        expect(board_in_check.in_check?(:white)).to eq(true)
+      end
     end
 
     context "when king is not in check" do
-      it "returns false"
+      it "returns false" do
+        expect(Board.new.in_check?(:white)).to eq(false)
+      end
     end
   end
 

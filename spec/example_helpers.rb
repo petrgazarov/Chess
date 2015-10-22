@@ -94,4 +94,43 @@ module ExampleHelpers
       expect(piece).to be_a(King) if idx == 4
     end
   end
+
+  def board_in_check
+    board = Board.new
+    grid = board.grid
+
+    [[0, 4], [0, 5], [1, 2], [7, 2], [7, 3], [1, 6], [6, 7]].each do |row, col|
+      grid[row][col] = nil
+    end
+    grid[2][2] = Pawn.new([2, 2], board, :black)
+    grid[2][6] = Pawn.new([2, 6], board, :black)
+    grid[2][7] = Bishop.new([2, 7], board, :black)
+    grid[6][3] = Queen.new([6, 3], board, :black)
+
+    grid[5][1] = Pawn.new([5, 1], board, :white)
+    grid[4][3] = Pawn.new([4, 3], board, :white)
+    grid[5][7] = Pawn.new([5, 7], board, :white)
+
+    board
+  end
+
+  def board_in_checkmate
+    board = Board.new
+    grid = board.grid
+
+    [[0, 4], [0, 5], [1, 2], [7, 1], [7, 2], [7, 3], [1, 6], [6, 7]].each do |row, col|
+      grid[row][col] = nil
+    end
+    grid[2][2] = Pawn.new([2, 2], board, :black)
+    grid[2][6] = Pawn.new([2, 6], board, :black)
+    grid[2][7] = Bishop.new([2, 7], board, :black)
+    grid[6][3] = Queen.new([6, 3], board, :black)
+
+    grid[5][0] = Knight.new([5, 0], board, :white)
+    grid[5][1] = Pawn.new([5, 1], board, :white)
+    grid[4][3] = Pawn.new([4, 3], board, :white)
+    grid[5][7] = Pawn.new([5, 7], board, :white)
+
+    board
+  end
 end
