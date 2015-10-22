@@ -2,20 +2,19 @@
 A two-player chess game written in Ruby and played in the console.
 
 ##About
-[SlidingPiece][sliding-piece] and [SteppingPiece][stepping-piece] classes are utilized to avoid repetition and DRY up code. [Keyboard support][keypress] is implemented via io/console extension of Ruby's built-in IO class.
+I wrote comprehensive [RSpec unit tests][spec] and created modules ([here][example_helpers] and [here][example_group_helpers]) to DRY up specs code.
 
-I wrote [RSpec unit tests][spec] for all pieces. I created modules to DRY up specs code.
+[SlidingPiece][sliding-piece] and [SteppingPiece][stepping-piece] classes are utilized to avoid repetition and DRY up pieces code. Keyboard support is implemented via io/console extension of Ruby's built-in IO class.
+
 
 [sliding-piece]: ./lib/sliding_piece.rb
 [stepping-piece]: ./lib/stepping_piece.rb
 [keypress]: ./lib/keypress.rb
 [spec]: ./spec
+[example_helpers]: ./spec/example_helpers.rb
+[example_group_helpers]: ./spec/example_group_helpers.rb
 
 ##How to Play
-NB: If you don't have Ruby, you can download it using simple instructions [here][ruby]. Make sure you are running Ruby version > 2.1.0
-
-[ruby]: https://www.ruby-lang.org/en/downloads/
-
 The game is played via keyboard input. To pick a piece, use arrow keys for navigation on the board and 'enter' for selection. Repeat for destination cell.
 
 * Download the repo
@@ -31,7 +30,6 @@ $ ruby play.rb
 ```
 
 ##To-Dos
-- [x] Write RSpec Tests for pieces
-- [ ] Write RSpec Tests for everything else
+- [x] Write RSpec unit tests
 - [ ] Implement en-passant, promotion and castling
 - [ ] Implement Computer Player AI
