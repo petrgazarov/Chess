@@ -117,7 +117,11 @@ RSpec.describe Board do
   end
 
   describe "#[]" do
-    it "gets the grid value for the given position"
+    it "gets the grid value for the given position" do
+      board = Board.new
+      expect(board[[1, 1]]).to be_a Pawn
+      expect(board[[4, 1]]).to be nil
+    end
   end
 
   describe "#[]=" do
