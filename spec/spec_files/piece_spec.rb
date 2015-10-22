@@ -7,6 +7,7 @@ RSpec.describe Piece do
     @board = double("board")
     @piece = Piece.new([3, 3], @board, :black)
   end
+
   describe "#initialize" do
     it "sets position, board and color as instance variables" do
       expect(@piece.position).to eq([3, 3])
@@ -20,6 +21,7 @@ RSpec.describe Piece do
       @new_board = double("board")
       @dupped_piece = @piece.dup(@new_board)
     end
+
     it "returns a new instance of Piece" do
       expect(@dupped_piece).not_to equal(@piece)
     end
@@ -35,13 +37,20 @@ RSpec.describe Piece do
     it "returns true if given the same color" do
       expect(@piece.same_color?(:black)).to eq true
     end
+
     it "returns false if given the opposite color" do
       expect(@piece.same_color?(:white)).to eq false
     end
   end
 
-  describe "#occupied" do
-    it "returns true if position is occupied"
-    it "returns false if position is empty"
+  describe "#occupied?" do
+
+    it "delegates to Board#[]" do
+      board = double("board")
+      allow(board).to receive(:[]).and_return true
+      piece = Piece.new([3, 3], board, :black)
+
+      expect(piece.occupied?([2, 2])).to eq(true)
+    end
   end
 end
