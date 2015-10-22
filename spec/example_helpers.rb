@@ -118,4 +118,15 @@ module ExampleHelpers
 
     board
   end
+
+  def board_before_check
+    board = Board.new
+    grid = board.grid
+
+    [[0, 3], [1, 2]].each { |row, col| grid[row][col] = nil }
+    grid[2][2] = Pawn.new([2, 2], board, :black)
+    grid[3][0] = Queen.new([3, 0], board, :black)
+
+    board
+  end
 end

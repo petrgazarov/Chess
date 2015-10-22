@@ -73,29 +73,46 @@ RSpec.describe Board do
   end
 
   describe "#move" do
+    before(:each) do
+      @board = Board.new
+    end
     context "when no piece exists on starting position" do
-      it "raises MoveError"
+      it "raises MoveError" do
+        expect { @board.move(:white, [3, 3], [2, 3]) }.to raise_error(MoveError)
+      end
     end
 
     context "when starting position is same as ending position" do
-      it "raises MoveError"
+      it "raises MoveError" do
+        expect { @board.move(:white, [6, 1], [6, 1]) }.to raise_error(MoveError)
+      end
     end
 
     context "when ending position is not among available moves of the piece" do
-      it "raises MoveError"
+      it "raises MoveError" do
+        expect { @board.move(:white, [6, 1], [3, 3]) }.to raise_error(MoveError)
+      end
     end
 
     context "when the move will put the player in check" do
-      it "raises MoveError"
+      it "raises MoveError" do
+        extend ExampleHelpers
+
+        expect { board_before_check.move(:white, [6, 3], [5, 3]) }.to raise_error(MoveError)
+      end
     end
 
     context "when the selected piece is not the color of the current player" do
-      it "raises MoveError"
+      it "raises MoveError" do
+        expect { @board.move(:white, [1, 1], [2, 1]) }.to raise_error(MoveError)
+      end
     end
 
     context "when move is valid" do
-      it "calls #move!"
-      it "moves the piece"
+      it "moves the piece" do
+        @board.move(:white, [6, 1], [5, 1])
+        expect(@board.grid[5][1]).to be_a(Piece)
+      end
     end
   end
 
