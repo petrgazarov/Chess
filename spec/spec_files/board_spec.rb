@@ -125,7 +125,12 @@ RSpec.describe Board do
   end
 
   describe "#[]=" do
-    it "sets the grid value for the given position"
+    let (:pawn) { double(:pawn) }
+    it "sets the grid value for the given position" do
+      board = Board.new
+      board[[3, 3]] = pawn
+      expect(board.grid[3][3]).to eq(pawn)
+    end
   end
 
   describe "#dup" do
