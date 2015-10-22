@@ -13,30 +13,12 @@ class Board
     [:white, :black].each { |color| populate(color) } if should_populate
   end
 
-  def populate(color)
-    row = (color == :white ? 7 : 0)
-    pawn_row = (color == :white ? 6 : 1)
-
-    (0...SIZE).each do |idx|
-      self[[pawn_row, idx]] = Pawn.new([pawn_row, idx], self, color)
-    end
-
-    PIECE_ORDER.each_with_index do |piece_class, column|
-      pos = [row, column]
-      self[pos] = piece_class.new(pos, self, color)
-    end
-  end
-
   def render(cursor_pos = nil)
     system "clear" or system "cls"
 
     (0...SIZE).each do |x|
       (0...SIZE).each do |y|
-        if self[[x, y]]
-          space = " #{self[[x, y]].to_s} "
-        else
-          space = "   "
-        end
+        space = (self[[x, y]] ? " #{self[[x, y]].to_s} " : "   ")
         if [x, y] == cursor_pos
           print space.on_red
         elsif (x.even? && y.even?) || (x.odd? && y.odd?)
@@ -91,6 +73,14 @@ class Board
     new_board
   end
 
+  def checkmate?(color)
+    result = []
+    pieces.each { |piece| result += piece.valid_moves if piece.same_color?(color) }
+    result.empty?
+  end
+
+  private
+
   def find_piece_on_board(piece, color)
     pieces.each do |piece_on_board|
       if piece_on_board.is_a?(piece) && piece_on_board.same_color?(color)
@@ -109,10 +99,18 @@ class Board
     false
   end
 
-  def checkmate?(color)
-    result = []
-    pieces.each { |piece| result += piece.valid_moves if piece.same_color?(color) }
-    result.empty?
+  def populate(color)
+    row = (color == :white ? 7 : 0)
+    pawn_row = (color == :white ? 6 : 1)
+
+    (0...SIZE).each do |idx|
+      self[[pawn_row, idx]] = Pawn.new([pawn_row, idx], self, color)
+    end
+
+    PIECE_ORDER.each_with_index do |piece_class, column|
+      pos = [row, column]
+      self[pos] = piece_class.new(pos, self, color)
+    end
   end
 
   def pieces
