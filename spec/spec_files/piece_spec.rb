@@ -32,8 +32,12 @@ RSpec.describe Piece do
   end
 
   describe "#same_color?" do
-    it "returns true if given the same color"
-    it "returns false if given the opposite color"
+    it "returns true if given the same color" do
+      expect(@piece.same_color?(:black)).to eq true
+    end
+    it "returns false if given the opposite color" do
+      expect(@piece.same_color?(:white)).to eq false
+    end
   end
 
   describe "#occupied" do
