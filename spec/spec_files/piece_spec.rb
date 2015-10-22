@@ -47,10 +47,10 @@ RSpec.describe Piece do
 
     it "delegates to Board#[]" do
       board = double("board")
-      allow(board).to receive(:[]).and_return true
       piece = Piece.new([3, 3], board, :black)
 
-      expect(piece.occupied?([2, 2])).to eq(true)
+      expect(board).to receive(:[])
+      piece.occupied?([2, 2])
     end
   end
 end

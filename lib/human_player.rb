@@ -1,5 +1,4 @@
 class HumanPlayer < Player
-
   def get_move
     read_char
   end

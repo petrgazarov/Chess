@@ -23,6 +23,7 @@ class Game
     until won?
       play_turn
     end
+
     declare_winner
   end
 
@@ -41,11 +42,13 @@ class Game
       puts e.message
       retry
     end
+
     switch_players
   end
 
   def move_cursor
     keystroke = ""
+    
     until keystroke == "\r"
       keystroke = current_player.get_move
       action(keystroke)
