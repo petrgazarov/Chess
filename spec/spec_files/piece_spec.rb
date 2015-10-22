@@ -9,7 +9,7 @@ RSpec.describe Piece do
   end
 
   describe "#initialize" do
-    it "sets position, board and color as instance variables" do
+    it "sets position, board and color as attributes accessible from outside the class scope" do
       expect(@piece.position).to eq([3, 3])
       expect(@piece.board).to eq(@board)
       expect(@piece.color).to eq(:black)
