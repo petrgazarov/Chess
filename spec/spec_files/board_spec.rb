@@ -114,8 +114,11 @@ RSpec.describe Board do
   end
 
   describe "#checkmate?" do
-    it "checks valid moves of pieces of the current player"
-    it "returns true if there is checkmate"
+    it "returns true if there is checkmate" do
+      extend ExampleHelpers
+
+      expect(board_in_check(true).checkmate?(:white)).to eq(true)
+    end
     it "return false if there is no checkmate"
   end
 end
