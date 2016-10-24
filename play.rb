@@ -1,4 +1,3 @@
-require 'byebug'
 require 'colorize'
 require './lib/piece'
 require './lib/stepping_piece'
